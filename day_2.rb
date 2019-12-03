@@ -14,35 +14,30 @@ def run(program, noun, verb)
   program[2] = verb
 
   while true do
-    #puts "Current index: #{current_index}"
-
-    op        = program[current_index]
-    operand_1 = program[program[current_index+1]]
-    operand_2 = program[program[current_index+2]]
-    output    = program[current_index+3]
+    op     = program[current_index]
+    noun   = program[program[current_index+1]]
+    verb   = program[program[current_index+2]]
+    output = program[current_index+3]
     result = nil
 
     case op
-    when 1
-      #puts "Adding: #{operand_1} + #{operand_2}"
-      result = operand_1 + operand_2
-    when 2
-      #puts "Multiplying: #{operand_1} * #{operand_2}"
-      result = operand_1 * operand_2
-    when 99
-      #puts "Exiting"
+    when 1 # Add
+      result = noun + verb
+    when 2 # Multiply
+      result = noun * verb
+    when 99 # Exit
       return program
     end
 
-    #puts "Assiging: #{result} to position #{output}"
     program[output] = result
-
     current_index += 4
   end
+rescue NoMethodError
+  puts "Invalid input: could not halt"
 end
 
-puts run(input.dup, 12, 2)[0]
-# 3850704
+puts "Example:  #{run(example, 9, 10)[0]}" # 3500
+puts "Answer 1: #{run(input.dup, 12, 2)[0]}" # 3850704
 
 # Brute force it!
 error = 0
@@ -51,8 +46,10 @@ error = 0
     program = input.dup
     answer = run(program, noun, verb)[0]
     if answer == 19690720
-      puts "Answer: 100 * #{noun} + #{verb} = #{(100 * noun) + verb} "
+      puts "Answer 2: 100 * #{noun} + #{verb} = #{(100 * noun) + verb} "
+      return # stop
     end
   end
 end
+
 puts "Done."
