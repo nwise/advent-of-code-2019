@@ -40,7 +40,6 @@ puts "Example:  #{run(example, 9, 10)[0]}" # 3500
 puts "Answer 1: #{run(input.dup, 12, 2)[0]}" # 3850704
 
 # Brute force it!
-error = 0
 (0..99).each do |noun|
   (0..99).each do |verb|
     program = input.dup
